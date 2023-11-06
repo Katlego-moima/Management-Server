@@ -28,12 +28,24 @@ router.post("/adminlogin", (req, res) => {
   });
 });
 
+router.get('/category', (req, res) => {
+  const sql ='SELECT * FROM category'
+  con.query(sql,(err, result) => {
+    if(err) return res.json({Status: false, Error: 'Query Error'})
+    return res.json({Status: true, Result: result})
+  })
+})
+
 router.post('/addCategory', (req,res) => {
   const sql = 'INSERT INTO category (`name`) VALUES (?)'
   con.query(sql,[req.body.category], (err, result) => {
     if(err) return res.json({Status: false, Error: 'Query Error'})
     return res.json({Status: true})
   })
+})
+
+router.post('/addEmployee', (req, res) => {
+  const sql = "INSERT INTO employee (`name`, `email`,`salary`,`image`,`password`,`address`, `categoryID`) VALUES (?)"
 })
 
 export { router as adminrouter };
