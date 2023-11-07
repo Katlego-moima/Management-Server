@@ -7,7 +7,7 @@ import path from 'path';
 
 const router = express.Router();
 
-router.post("/adminlogin", (req, res) => {
+router.post("/adminLogin", (req, res) => {
   //matching user details with the details in the database
 
   const sql = "SELECT * FROM admin WHERE email = ? AND password = ?";
@@ -123,7 +123,7 @@ router.put('/editEmployee/:id', (req, res) => {
 })
 
 router.delete(`/deleteEmployee/:id`, (req, res) => {
-  const id = req.body.id;
+  const id = req.params.id;
   const sql = 'DELETE FROM employee WHERE id = ?'
   con.query(sql, [id], (err, result) => {
     if (err) return res.json({ Status: false, Error: 'Query Error' + err })
@@ -131,6 +131,44 @@ router.delete(`/deleteEmployee/:id`, (req, res) => {
   })
 })
 
+router.get(`/adminCount`, (req, res) => {
+  const sql = 'SELECT COUNT(id) as admin FROM admin'
+  con.query(sql, (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' + err })
+    return res.json({ Status: true, Result: result })
+  })
+})
 
+router.get(`/employeeCount`, (req, res) => {
+  const sql = 'SELECT COUNT(id) as employee FROM employee'
+  con.query(sql, (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' + err })
+    return res.json({ Status: true, Result: result })
+  })
+})
+
+router.get(`/salaryCount`, (req, res) => {
+  const sql = 'SELECT SUM(salary) as salary FROM employee'
+  con.query(sql, (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' + err })
+    return res.json({ Status: true, Result: result })
+  })
+})
+
+router.get(`/adminRecords`, (req, res) => {
+  const sql = 'SELECT * FROM admin'
+  con.query(sql, (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' + err })
+    return res.json({ Status: true, Result: result })
+  })
+})
+
+router.get(`/logout`, (req, res) => {
+
+  res.clearCookie('token')
+  return res.json({ Status: true })
+
+
+})
 
 export { router as adminrouter };
