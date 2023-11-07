@@ -1,6 +1,6 @@
 import express from "express";
 import cors from 'cors';
-import {adminrouter} from './Routes/adminRoute.js'
+import { adminrouter } from './Routes/adminRoute.js'
 
 
 const app = express();
@@ -10,7 +10,8 @@ app.use(cors({
   credentials: true
 }));
 app.use(express.json());
-app.use('/auth',adminrouter)
+app.use('/auth', adminrouter);
+app.use(express.static('Public'));
 
 const PORT = 3200;
 

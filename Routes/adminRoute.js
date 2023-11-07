@@ -87,4 +87,50 @@ router.post('/addEmployee', upload.single('image'), (req, res) => {
 
 })
 
+router.get('/employee', (req, res) => {
+  const sql = 'SELECT * FROM employee'
+  con.query(sql, (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' })
+    return res.json({ Status: true, Result: result })
+  })
+})
+
+router.get('/employee/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = 'SELECT * FROM employee WHERE id = ?'
+  con.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' })
+    return res.json({ Status: true, Result: result })
+  })
+})
+
+router.put('/editEmployee/:id', (req, res) => {
+  const id = req.params.id;
+  const sql = `UPDATE employee set
+   name = ?,email = ?,salary = ?, address = ?,categoryID = ? WHERE id = ? `
+  const values = [
+    req.body.name,
+    req.body.email,
+    req.body.salary,
+    req.body.address,
+    req.body.categoryID,
+  ]
+  con.query(sql, [...values, id], (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' + err })
+    return res.json({ Status: true, Result: result })
+  })
+
+})
+
+router.delete(`/deleteEmployee/:id`, (req, res) => {
+  const id = req.body.id;
+  const sql = 'DELETE FROM employee WHERE id = ?'
+  con.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Status: false, Error: 'Query Error' + err })
+    return res.json({ Status: true, Result: result })
+  })
+})
+
+
+
 export { router as adminrouter };
