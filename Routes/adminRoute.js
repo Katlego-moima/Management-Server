@@ -51,13 +51,20 @@ router.post('/addCategory', (req, res) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/images')
+    cb(null, 'Public/Images')
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "_" + Date.now() + path.extname(file.originalname))
   }
 })
 
+const upload = multer({
+  storage: storage
+})
 
+router.post('/addEmployee', upload.single('image'), (req, res) => {
 
-router.post('/addEmployee', (req, res) => {
+  if (!req.file) { return res.status(400).json({ error: 'No file uploaded' }); }
   const sql = `INSERT INTO employee
   (name, email, salary, image, password, address, categoryID)
   VALUES (?)`;
@@ -67,7 +74,7 @@ router.post('/addEmployee', (req, res) => {
       req.body.name,
       req.body.email,
       req.body.salary,
-      req.body.image,
+      req.file.filename,
       hash,
       req.body.address,
       req.body.categoryID,
