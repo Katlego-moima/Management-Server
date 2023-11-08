@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 const router = express.Router()
 
-router.post("/employeeLogin", (req, res) => {
+router.post('/employeeLogin', (req, res) => {
     //matching user details with the details in the database
     const sql = "SELECT * FROM employee WHERE email = ?";
 
@@ -18,11 +18,11 @@ router.post("/employeeLogin", (req, res) => {
                     //generate a token 
                     const token = jwt.sign(
                         { role: "employee", email: email },
-                        "secret_for_katlego",
+                        "secret_for_kat",
                         { expiresIn: "1d" }
                     );
                     res.cookie('token', token)
-                    return res.json({ loginStatus: true });
+                    return res.json({ loginStatus: true, id: result[0].id });
                 }
             })
         }
@@ -31,5 +31,21 @@ router.post("/employeeLogin", (req, res) => {
         }
     });
 });
+
+router.get(`/detail/:id`, (req, res) => {
+    const id = req.params.id;
+    const sql = 'SELECT * FROM employee WHERE id = ?'
+    con.query(sql, [id], (err, result) => {
+        if (err) return res.json({ Status: false })
+
+        return res.json(result)
+
+    })
+})
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('token')
+    return res.json({ Status: true })
+})
 
 export { router as employeeRouter }
