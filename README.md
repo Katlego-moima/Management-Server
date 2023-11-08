@@ -8,7 +8,7 @@ To run this server application, follow these steps:
 
 1. Clone the repository:
 
-   git clone https://github.com/your-username/employee-management-system-server.git
+   git clone https://github.com/Katlego-moima/Management-Server.git
 
 2. Change directory to the server folder:
 
