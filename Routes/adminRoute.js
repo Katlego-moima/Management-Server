@@ -18,7 +18,7 @@ router.post("/adminLogin", (req, res) => {
       const email = result[0].email;
       //generate a token
       const token = jwt.sign(
-        { role: "admin", email: email },
+        { role: "admin", email: email, id: result[0].id },
         "secret_for_katlego",
         { expiresIn: "1d" }
       );
