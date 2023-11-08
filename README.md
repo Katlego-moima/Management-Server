@@ -34,14 +34,14 @@ The server provides various API endpoints for managing employee records and auth
 
 #### Description: Authenticate an admin user and generate a JWT token for authorization.
 
-##### Request Body:
+Request Body:
 
 {
 "email": "admin@example.com",
 "password": "adminpassword"
 }
 
-#### Admin Functionalities
+Admin Functionalities
 
 2. GET /auth/category
 
@@ -51,7 +51,7 @@ The server provides various API endpoints for managing employee records and auth
 
 #### Description: Add a new category.
 
-##### Request Body:
+Request Body:
 
 {
 "category": "New Category"
@@ -61,7 +61,7 @@ The server provides various API endpoints for managing employee records and auth
 
 #### Description: Add a new employee with image upload.
 
-##### Request Body:
+Request Body:
 
 Form fields: name, email, salary, image (file), password, address, categoryID 5. GET /auth/employee
 
@@ -75,7 +75,7 @@ Form fields: name, email, salary, image (file), password, address, categoryID 5.
 
 #### Description: Update an existing employee's details.
 
-##### Request Body: Employee details to update.
+Request Body: Employee details to update.
 
 8. DELETE /auth/deleteEmployee/:id
 
@@ -105,7 +105,7 @@ Employee Authentication 14. POST /employee/employeeLogin
 
 #### Description: Authenticate an employee user and generate a JWT token for authorization.
 
-##### Request Body:
+Request Body:
 
 {
 "email": "employee@example.com",
