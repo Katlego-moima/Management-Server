@@ -69,25 +69,25 @@ Form fields: name, email, salary, image (file), password, address, categoryID 5.
 
 6. GET /auth/employee/:id
 
-#### Description: Retrieve a specific employee by ID.
+### Description: Retrieve a specific employee by ID.
 
 7. PUT /auth/editEmployee/:id
 
-#### Description: Update an existing employee's details.
+### Description: Update an existing employee's details.
 
 Request Body: Employee details to update.
 
 8. DELETE /auth/deleteEmployee/:id
 
-#### Description: Delete an employee by ID.
+### Description: Delete an employee by ID.
 
 9. GET /auth/adminCount
 
-#### Description: Retrieve the count of admin records.
+### Description: Retrieve the count of admin records.
 
 10. GET /auth/employeeCount
 
-#### Description: Retrieve the count of employee records.
+### Description: Retrieve the count of employee records.
 
 11. GET /auth/salaryCount
 
@@ -101,18 +101,22 @@ Request Body: Employee details to update.
 
 #### Description: Clear the authentication token for logout.
 
-Employee Authentication 14. POST /employee/employeeLogin
+Employee Authentication
+
+1. POST /employee/employeeLogin
 
 #### Description: Authenticate an employee user and generate a JWT token for authorization.
 
 Request Body:
-
 {
 "email": "employee@example.com",
 "password": "employeepassword"
-} 15. GET /employee/detail/:id
+}
 
-#### Description: Retrieve details of an employee by ID.
+2. GET /employee/detail/:id
 
-16. GET /employee/logout
-    Description: Clear the authentication token for logout.
+### Description: Retrieve details of an employee by ID.
+
+3. GET /employee/logout
+
+### Description: Clear the authentication token for logout.
